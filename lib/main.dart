@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'MaleFemale.dart';
+
+import 'NameEmail.dart';
+
 import './SplashScreen.dart';
 import './widgets/NewTransaction.dart';
 import './widgets/transaction_list.dart';
@@ -15,6 +19,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  static const routeName = '/homePage';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,7 +35,12 @@ class MyApp extends StatelessWidget {
               color: Color.fromRGBO(25, 24, 24, 1),
             )),
       ),
-      home: SplashScreen(),
+      routes: {
+        '/': (context) => SplashScreen(),
+        MaleFemale.routeName: (context) => MaleFemale(),
+        NameEmail.routeName: (context) => NameEmail(),
+        MyApp.routeName: (context) => HomePage(),
+      },
     );
   }
 }
@@ -122,15 +132,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _filterMonth() {
-    final suggestions = _userTransaction.where((i) {
-      return i.dateTime.isAfter(DateTime.now().subtract(Duration(days: 31)));
-    }).toList();
-    setState(() {
-      _transactionFilter = suggestions;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final appbar = AppBar(
@@ -138,79 +139,36 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         flexibleSpace: LayoutBuilder(
           builder: (context, constraints) {
-            return Row(
-              children: [
-                SizedBox(
-                  height: constraints.maxHeight * 0.6,
-                  width: constraints.maxWidth * 0.15,
-                ),
-                Container(
-                  height: constraints.maxHeight * 0.6,
-                  width: constraints.maxWidth * 0.8,
-                  margin: EdgeInsets.only(
-                    top: 35,
-                    left: 10,
-                    right: 10,
-                    bottom: 10,
-                  ),
-                  child: TextField(
-                    textAlign: TextAlign.left,
-                    controller: _searchcontroller,
-                    onChanged: _filterTransaction,
-                    decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        filled: true,
-                        fillColor: Mycolor1,
-                        prefixIcon: Icon(Icons.search, color: Colors.black),
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        hintStyle: new TextStyle(color: Colors.black38),
-                        hintText: "Search"),
-                  ),
-                ),
-              ],
+            return Container(
+              height: constraints.maxHeight * 0.6,
+              width: double.infinity,
+              margin: EdgeInsets.only(
+                top: 35,
+                left: 10,
+                right: 10,
+                bottom: 10,
+              ),
+              child: TextField(
+                textAlign: TextAlign.left,
+                controller: _searchcontroller,
+                onChanged: _filterTransaction,
+                decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    filled: true,
+                    fillColor: Mycolor1,
+                    prefixIcon: Icon(Icons.search, color: Colors.black),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    hintStyle: new TextStyle(color: Colors.black38),
+                    hintText: "Search"),
+              ),
             );
           },
         ));
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appbar,
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              child: Text(
-                'Menu ',
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              decoration: BoxDecoration(color: Mycolor1),
-            ),
-            ListTile(
-              title: Text('The Most Expenses'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(),
-                    ));
-              },
-            ),
-            ListTile(
-              title: Text('The Last Month '),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(),
-                    ));
-              },
-            ),
-          ],
-        ),
-      ),
       body: SafeArea(
         child: Container(
           child: Column(

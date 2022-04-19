@@ -19,14 +19,14 @@ class _SplashScreenState extends State<SplashScreen>
     bool _seen = (prefs.getBool('seen') ?? false);
 
     if (_seen) {
-      Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => HomePage()));
+      Timer(Duration(seconds: 3),
+          (() => Navigator.of(context).pushReplacementNamed(MyApp.routeName)));
     } else {
       await prefs.setBool('seen', true);
       Timer(
         Duration(seconds: 3),
-        (() => Navigator.of(context).pushReplacement(
-            new MaterialPageRoute(builder: (context) => MaleFemale()))),
+        (() =>
+            Navigator.of(context).pushReplacementNamed(MaleFemale.routeName)),
       );
     }
   }

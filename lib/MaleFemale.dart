@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:some_project/NameEmail.dart';
-import 'package:some_project/main.dart';
+
+import './NameEmail.dart';
+import './main.dart';
 
 class MaleFemale extends StatefulWidget {
+  static const routeName = '/maleFemale';
+
   @override
   State<MaleFemale> createState() => _MaleFemaleState();
 }
@@ -18,8 +21,8 @@ class _MaleFemaleState extends State<MaleFemale> {
             children: [
               IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => NameEmail()));
+                  Navigator.of(context)
+                      .pushReplacementNamed(NameEmail.routeName);
                 },
                 icon: Icon(
                   Icons.male,

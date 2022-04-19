@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:some_project/main.dart';
+
+import './main.dart';
 
 class NameEmail extends StatefulWidget {
+  static const routeName = '/nameEmail';
   @override
   State<NameEmail> createState() => _NameEmailState();
 }

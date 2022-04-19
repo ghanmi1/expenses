@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:some_project/main.dart';
+
+import '../main.dart';
 
 class ChartBar extends StatelessWidget {
   final double spindingAmount;
