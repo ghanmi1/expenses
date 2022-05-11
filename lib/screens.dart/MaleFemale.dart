@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:some_project/screens.dart/OverView_Screen.dart';
 
 import './NameEmail.dart';
-import './main.dart';
+import '../main.dart';
 
 class MaleFemale extends StatefulWidget {
   static const routeName = '/maleFemale';
@@ -42,7 +43,7 @@ class _MaleFemaleState extends State<MaleFemale> {
               IconButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => HomePage()));
+                      builder: (BuildContext context) => OverViewScreen()));
                 },
                 icon: Icon(
                   Icons.female,

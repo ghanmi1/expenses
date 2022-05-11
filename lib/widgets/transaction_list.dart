@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../main.dart';
-import '../models/transaction.dart';
+import '../providers.dart/User_Transaction.dart';
 
 class TransactionList extends StatelessWidget {
-  final List<Transaction> transactions;
-  final Function deleteTrs;
-
-  TransactionList(this.transactions, this.deleteTrs);
-
   @override
   Widget build(BuildContext context) {
+    final trans = Provider.of<UserTransaction>(context);
+    final transdata = trans.transaction;
     return Container(
-        child: transactions.isEmpty
+        child: transdata.isEmpty
             ? LayoutBuilder(builder: (cntx, constraints) {
                 return Column(
                   children: [
@@ -61,7 +59,7 @@ class TransactionList extends StatelessWidget {
                           padding: EdgeInsets.all(5),
                           child: FittedBox(
                             child: Text(
-                                '\$ ${transactions[index].amount.toStringAsFixed(2)}',
+                                '\$ ${transdata[index].amount.toStringAsFixed(2)}',
                                 style: TextStyle(
                                     color: Color.fromRGBO(42, 42, 42, 1),
                                     fontWeight: FontWeight.bold,
@@ -70,22 +68,23 @@ class TransactionList extends StatelessWidget {
                         ),
                       ),
                       title: Text(
-                        transactions[index].title,
+                        transdata[index].title,
                         style: Theme.of(context).textTheme.headline6,
                       ),
-                      subtitle: Text(DateFormat.yMMMd()
-                          .format(transactions[index].dateTime)),
+                      subtitle: Text(
+                          DateFormat.yMMMd().format(transdata[index].dateTime)),
                       trailing: IconButton(
                         icon: Icon(
                           Icons.delete,
                           color: Colors.red,
                         ),
-                        onPressed: () => deleteTrs(transactions[index].id),
+                        onPressed: () =>
+                            trans.deleteTransaction(transdata[index].id),
                       ),
                     ),
                   );
                 },
-                itemCount: transactions.length,
+                itemCount: transdata.length,
               ));
   }
 }

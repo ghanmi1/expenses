@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:some_project/screens.dart/OverView_Screen.dart';
 
-import './main.dart';
+import '../main.dart';
 
 class NameEmail extends StatefulWidget {
   static const routeName = '/nameEmail';
@@ -53,7 +54,7 @@ class _NameEmailState extends State<NameEmail> {
               controller: _emailcontroller,
             ),
             SizedBox(
-              height: 20,
+              height: 40,
             ),
             RaisedButton(
                 color: Mycolor1,
@@ -66,7 +67,7 @@ class _NameEmailState extends State<NameEmail> {
                     return;
                   } else {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (BuildContext context) => HomePage()));
+                        builder: (BuildContext context) => OverViewScreen()));
                   }
                 },
                 child: Text(

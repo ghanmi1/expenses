@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:after_layout/after_layout.dart';
+import 'package:some_project/screens.dart/OverView_Screen.dart';
 
-import 'package:some_project/MaleFemale.dart';
+import './MaleFemale.dart';
 import 'package:some_project/main.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,8 +20,10 @@ class _SplashScreenState extends State<SplashScreen>
     bool _seen = (prefs.getBool('seen') ?? false);
 
     if (_seen) {
-      Timer(Duration(seconds: 3),
-          (() => Navigator.of(context).pushReplacementNamed(MyApp.routeName)));
+      Timer(
+          Duration(seconds: 3),
+          (() => Navigator.of(context)
+              .pushReplacementNamed(OverViewScreen.routename)));
     } else {
       await prefs.setBool('seen', true);
       Timer(
